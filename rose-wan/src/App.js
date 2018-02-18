@@ -29,6 +29,9 @@ class App extends Component {
 
   handleFormSubmit(name) {
     // console.log("submitted: ", name);
+    if (!name) {
+      return;
+    }
     this.setState({
       loading: true
     });
