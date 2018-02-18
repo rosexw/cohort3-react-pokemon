@@ -11,7 +11,7 @@ const fetchPokemon = idOrName =>
     .then(response => response.json())
     .then(pokemonData => ({
       name: pokemonData.name,
-      picture: pokemonData.sprites.front_default
+      picture: pokemonData.sprites && pokemonData.sprites.front_default
     }));
 
 class App extends Component {
@@ -44,7 +44,7 @@ class App extends Component {
   }
 
   render() {
-    let hasData = this.state.name && this.state.picture
+    let hasData = this.state.name && this.state.picture;
     let pokemonDisplay = hasData && !this.state.loading ? <Pokemon name={this.state.name} picture={this.state.picture} /> : null;
     let loading = this.state.loading ? "loading..." : null;
 
