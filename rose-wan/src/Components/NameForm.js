@@ -25,7 +25,7 @@ class NameForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Pokemon Name:
-          <input type="text" placeholder="PIKACHU" value={this.state.value} onChange={this.handleChange} />
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
         </label>
         <input type="submit" value="Submit" />
       </form>

@@ -19,7 +19,8 @@ class App extends Component {
     super(props);
     this.state = {
       name: '',
-      picture: ''
+      picture: '',
+      loading: false
     };
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -28,19 +29,28 @@ class App extends Component {
 
   handleFormSubmit(name) {
     // console.log("submitted: ", name);
+    this.setState({
+      loading: true
+    });
     fetchPokemon(name)
     .then(pokemonData => this.setState({
       name: pokemonData.name,
-      picture: pokemonData.picture
-    }))
+      picture: pokemonData.picture,
+      loading: false
+    }));
   }
 
   render() {
+    let hasData = this.state.name && this.state.picture
+    let pokemonDisplay = hasData && !this.state.loading ? <Pokemon name={this.state.name} picture={this.state.picture} /> : null;
+    let loading = this.state.loading ? "loading..." : null;
+
     return (
       <div className="App">
         <Header text="Gotta Fetch 'em all!" />
         <NameForm handleFormSubmit={this.handleFormSubmit} />
-        <Pokemon name={this.state.name} picture={this.state.picture} />
+        { pokemonDisplay }
+        { loading }
       </div>
     );
   }
