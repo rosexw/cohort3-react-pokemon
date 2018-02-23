@@ -13,6 +13,8 @@ const fetchPokemon = idOrName =>
       name: pokemonData.name,
       picture: pokemonData.sprites && pokemonData.sprites.front_default
     }));
+    // .catch((error) => {console.error(`No Pokemon by ${pokemonData.name} found`)})
+    // ;
 
 class App extends Component {
   constructor(props) {
@@ -43,10 +45,14 @@ class App extends Component {
     }));
   }
 
+  // saveSearchTerm = event => {
+  //   this.setState({searchTerm: event.target.value});
+  // };
+
   render() {
     let hasData = this.state.name && this.state.picture;
     let pokemonDisplay = hasData && !this.state.loading ? <Pokemon name={this.state.name} picture={this.state.picture} /> : null;
-    let loading = this.state.loading ? "loading..." : null;
+    let loading = this.state.loading ? "Loading..." : null;
 
     return (
       <div className="App">
