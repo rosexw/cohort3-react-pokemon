@@ -3,6 +3,14 @@
   top: 30%;
 }
 
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  background: #ecf0f1;
+}
 
 .input-field, .submit-button {
   margin-left: 10px;
@@ -37,6 +45,9 @@ ul li {
   list-style:none;
 }
 
+
+
+/* POKEBALL LOADING SYMBOL STYLING */
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;

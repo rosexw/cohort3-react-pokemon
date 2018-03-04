@@ -4,6 +4,7 @@ import './App.css';
 import Header from './Components/Header';
 import NameForm from './Components/NameForm';
 import Pokemon from './Components/Pokemon';
+// import Loading from './Components/Loading';
 
 // use this to fetch data
 const fetchPokemon = idOrName =>
@@ -29,6 +30,7 @@ class App extends Component {
     this.state = {
       name: '',
       picture: '',
+      results: [],
       loading: false,
       error: null
     };
@@ -40,16 +42,24 @@ class App extends Component {
   handleFormSubmit(name) {
     // console.log("submitted: ", name);
     if (!name) {
+      this.setState({
+        name: null,
+        picture: null,
+        loading: true,
+        error: null
+      });
       fetchPokemonList()
       .then(pokemonData =>
         this.setState({
-          results: pokemonData.results
+          results: pokemonData.results,
+          loading: false
         }))
       return;
     };
     this.setState({
       loading: true,
-      error: null
+      error: null,
+      results: []
     });
     fetchPokemon(name)
     .then(pokemonData => this.setState({
