@@ -16,13 +16,21 @@ const fetchPokemon = idOrName =>
     // .catch((error) => {console.error(`No Pokemon by ${pokemonData.name} found`)})
     // ;
 
+const fetchPokemonList = () =>
+  fetch(`https://pokeapi.co/api/v2/pokemon/`)
+    .then(response => response.json())
+    .then(pokemonData => ({
+      results: pokemonData.results,
+    }))
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
       picture: '',
-      loading: false
+      loading: false,
+      error: null
     };
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -32,16 +40,23 @@ class App extends Component {
   handleFormSubmit(name) {
     // console.log("submitted: ", name);
     if (!name) {
+      fetchPokemonList()
+      .then(pokemonData =>
+        this.setState({
+          results: pokemonData.results
+        }))
       return;
-    }
+    };
     this.setState({
-      loading: true
+      loading: true,
+      error: null
     });
     fetchPokemon(name)
     .then(pokemonData => this.setState({
       name: pokemonData.name,
       picture: pokemonData.picture,
-      loading: false
+      loading: false,
+      error: null
     }));
   }
 
@@ -53,15 +68,22 @@ class App extends Component {
     let hasData = this.state.name && this.state.picture;
     let pokemonDisplay = hasData && !this.state.loading ? <Pokemon name={this.state.name} picture={this.state.picture} /> : null;
     let loading = this.state.loading ? "Loading..." : null;
+    let error = this.state.error;
 
     return (
       <div className="App">
         <Header text="Gotta Fetch 'em all!" />
         <NameForm handleFormSubmit={this.handleFormSubmit} />
+        <ul>{ this.renderList(this.state.results) }</ul>
         { pokemonDisplay }
         { loading }
+        { error }
       </div>
     );
+  }
+  renderList(results) {
+    if (!results) return;
+    return results.map((singlePokemon, index) => <li key={ index }>{ singlePokemon.name }</li>);
   }
 }
 
