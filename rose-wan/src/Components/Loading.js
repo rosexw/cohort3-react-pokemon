@@ -1,13 +1,11 @@
 import React from 'react';
 
-const Header = () => {
+import spinner from '../Pokeball.svg'
+
+const Loading = () => {
   return (
-    <div>
-      <div className="pokeball App-logo">
-        <div className="pokeball__button"></div>
-      </div>
-    </div>
+    <img src={ spinner } alt="Poke Ball" className="pokeball"/>
   )
 }
 
-export default Header;
+export default Loading;

@@ -48,11 +48,11 @@ ul li {
 
 
 /* POKEBALL LOADING SYMBOL STYLING */
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
+.pokeball {
+  animation: pokeball-spin infinite 10s linear;
   height: 80px;
 }
-@keyframes App-logo-spin {
+@keyframes pokeball-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }

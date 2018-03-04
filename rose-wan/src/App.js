@@ -4,7 +4,7 @@ import './App.css';
 import Header from './Components/Header';
 import NameForm from './Components/NameForm';
 import Pokemon from './Components/Pokemon';
-// import Loading from './Components/Loading';
+import Loading from './Components/Loading';
 
 // use this to fetch data
 const fetchPokemon = idOrName =>
@@ -77,7 +77,7 @@ class App extends Component {
   render() {
     let hasData = this.state.name && this.state.picture;
     let pokemonDisplay = hasData && !this.state.loading ? <Pokemon name={this.state.name} picture={this.state.picture} /> : null;
-    let loading = this.state.loading ? "Loading..." : null;
+    let loading = this.state.loading ? <Loading /> : null;
     let error = this.state.error;
 
     return (
