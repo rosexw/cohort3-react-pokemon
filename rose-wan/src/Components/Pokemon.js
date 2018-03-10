@@ -4,7 +4,7 @@ const Pokemon = (props) => {
   return (
     <div className="PokemonDetails">
       <h3 className="display-name">Pokemon: {props.name} </h3>
-      <img className="display-image" src={props.picture}></img>
+      <img className="display-image" alt="Pokemon display" src={props.picture}></img>
     </div>
   );
 }
