@@ -1,5 +1,4 @@
-import { fetchPokemonServer } from '../fetchPokemonServer';
-
+import { fetchPokemonServer, fetchPokemonListServer } from '../fetchPokemonServer';
 
 const fetchPokemonStart = () => {
   return {
@@ -26,6 +25,35 @@ export function fetchPokemon(nameOrId){
       pokemonData => dispatch(fetchPokemonSuccess(pokemonData))
     ).catch(
       error => dispatch(fetchPokemonError())
+    );
+  }
+}
+
+
+const fetchPokemonListStart = () => {
+  return {
+    type: 'FETCH_POKEMON_LIST_START',
+  };
+}
+const fetchPokemonListSuccess = (pokemonData) => {
+  return {
+    type: 'FETCH_POKEMON_LIST_SUCCESS',
+    results: pokemonData.results
+  };
+}
+const fetchPokemonListError = (error) => {
+  return {
+    type: 'FETCH_POKEMON_LIST_ERROR',
+  };
+}
+
+export function fetchPokemonList(){
+  return (dispatch) => {
+    dispatch(fetchPokemonListStart());
+    fetchPokemonListServer().then(
+      pokemonData => dispatch(fetchPokemonListSuccess(pokemonData))
+    ).catch(
+      error => dispatch(fetchPokemonListError())
     );
   }
 }

@@ -8,7 +8,7 @@ import Loading from './Components/Loading';
 
 import { connect } from 'react-redux';
 
-import { fetchPokemon } from './actions/index';
+import { fetchPokemon, fetchPokemonList } from './actions/index';
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -17,6 +17,7 @@ const mapStateToProps = (state, ownProps) => {
     picture: state.picture,
     loading: state.loading,
     error: state.error,
+    results: state.results
   }
 }
  
@@ -24,6 +25,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onFetchPokemon: nameOrId => {
       dispatch(fetchPokemon(nameOrId))
+    },
+    onFetchPokemonList: () => {
+      dispatch(fetchPokemonList())
     }
   }
 }
@@ -31,42 +35,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: '',
-      picture: '',
-      results: [],
-      loading: false,
-      error: null
-    };
-
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-
-
-
   handleFormSubmit(name) {
-    this.props.onFetchPokemon(name);
-    // console.log("submitted: ", name);
-    // if (!name) {
-    //   this.setState({
-    //     name: null,
-    //     picture: null,
-    //     loading: true,
-    //     error: null
-    //   });
-    //   fetchPokemonList()
-    //   .then(pokemonData =>
-    //     this.setState({
-    //       results: pokemonData.results,
-    //       loading: false
-    //     }))
-    //   .catch(error => this.setState({
-    //     loading: false,
-    //     error: "Pokemon cannot be fetched. Please type in another Pokemon.",
-    //   }))
-    //   return;
-    // };
+    if (!name) {
+      this.props.onFetchPokemonList();
+    } else {
+      this.props.onFetchPokemon(name);
+    }
   }
 
   render() {
@@ -79,7 +56,7 @@ class App extends Component {
       <div className="App">
         <Header text="Gotta Fetch 'em all!" />
         <NameForm handleFormSubmit={this.handleFormSubmit} />
-        <ul>{ this.renderList(this.state.results) }</ul>
+        <ul>{ this.renderList(this.props.results) }</ul>
         { pokemonDisplay }
         { loading }
         { error }

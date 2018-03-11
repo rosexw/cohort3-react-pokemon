@@ -1,5 +1,9 @@
 const initialState = {
-  loading: false
+  loading: false,
+  results: [],
+  error: null,
+  name: '',
+  picture: ''
 };
 
 const pokemonApp = (state = initialState, action) => {
@@ -7,6 +11,7 @@ const pokemonApp = (state = initialState, action) => {
     case 'FETCH_POKEMON_START':
       return {
         ...state,
+        results: [],
         loading: true,
         error: null
       };
@@ -23,7 +28,28 @@ const pokemonApp = (state = initialState, action) => {
           ...state,
           loading: false,
           error: "Pokemon cannot be fetched. Please type in another Pokemon."
-        }
+        };
+    case 'FETCH_POKEMON_LIST_START':
+      return {
+        ...state,
+        name: '',
+        picture: '',
+        loading: true,
+        error: null
+      };
+    case 'FETCH_POKEMON_LIST_SUCCESS':
+        return {
+          ...state,
+          results: action.results,
+          loading: false,
+          error: null
+        };
+    case 'FETCH_POKEMON_LIST_ERROR':
+        return {
+          ...state,
+          loading: false,
+          error: "Pokemon List cannot be fetched. Please type in a Pokemon."
+        };
     default:
       return state;
   }
