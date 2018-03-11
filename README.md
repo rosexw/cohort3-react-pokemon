@@ -12,6 +12,8 @@ a pokemon based on user input and displays it.
 2. Create a folder with your first and last name (e.g. `arya-stark`)
 3. Run `create-react-app` in that folder. This is where your app will live.
 
+Run this code to a local web server with `npm run start`
+
 ### Assignment
 
 * Create a header component that should read `Gotta Fetch em all!` through props
@@ -26,7 +28,7 @@ We'll be leveraging the `fetch` API and the [pokeapi](https://pokeapi.co/docsv2/
 
 The endpoint we're going to be using is `https://pokeapi.co/api/v2/pokemon/:nameOrId` where `nameOrId` should come from the user input field.
 
-* Wednesday, Feb 21, 2018
+##Wednesday, Feb 21, 2018
 ### Bonus
 
 You will be updating your pokemon app to do the following two things:
