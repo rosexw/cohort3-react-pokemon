@@ -8,8 +8,6 @@ export function fetchPokemonServer(idOrName) {
       picture: pokemonData.sprites && pokemonData.sprites.front_default
   }));
 }
-    // .catch((error) => {console.error(`No Pokemon by ${pokemonData.name} found`)})
-    // ;
 
 export function fetchPokemonListServer() {
   return fetch(`https://pokeapi.co/api/v2/pokemon/`)

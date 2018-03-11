@@ -67,28 +67,7 @@ class App extends Component {
     //   }))
     //   return;
     // };
-    // this.setState({
-    //   loading: true,
-    //   error: null,
-    //   results: []
-    // });
-    // fetchPokemon(name)
-    // .then(pokemonData => this.setState({
-    //   name: pokemonData.name,
-    //   picture: pokemonData.picture,
-    //   loading: false,
-    //   error: null,
-    // }))
-    // .catch(error => this.setState({
-    //   //check error status code here to see what kind of errors are produced - like: Pokemon doesn't exist, no Internet, etc.
-    //   loading: false,
-    //   error: "Pokemon cannot be fetched. Please type in another Pokemon.",
-    // }))
   }
-
-  // saveSearchTerm = event => {
-  //   this.setState({searchTerm: event.target.value});
-  // };
 
   render() {
     let hasData = this.props.name && this.props.picture;
