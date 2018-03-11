@@ -6,9 +6,11 @@ const fetchPokemonStart = () => {
     type: 'FETCH_POKEMON_START',
   };
 }
-const fetchPokemonSuccess = () => {
+const fetchPokemonSuccess = (pokemonData) => {
   return {
     type: 'FETCH_POKEMON_SUCCESS',
+    name: pokemonData.name,
+    picture: pokemonData.picture
   };
 }
 const fetchPokemonError = (error) => {
@@ -17,11 +19,11 @@ const fetchPokemonError = (error) => {
   };
 }
 
-export const fetchPokemon = nameOrId => {
+export function fetchPokemon(nameOrId){
   return (dispatch) => {
     dispatch(fetchPokemonStart());
-    fetchPokemonServer.then(
-      pokemonData => dispatch(fetchPokemonSuccess())
+    fetchPokemonServer(nameOrId).then(
+      pokemonData => dispatch(fetchPokemonSuccess(pokemonData))
     ).catch(
       error => dispatch(fetchPokemonError())
     );

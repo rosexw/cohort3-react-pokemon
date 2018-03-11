@@ -13,7 +13,10 @@ import { fetchPokemon } from './actions/index';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-
+    name: state.name,
+    picture: state.picture,
+    loading: state.loading,
+    error: state.error,
   }
 }
  
@@ -88,10 +91,10 @@ class App extends Component {
   // };
 
   render() {
-    let hasData = this.state.name && this.state.picture;
-    let pokemonDisplay = hasData && !this.state.loading ? <Pokemon name={this.state.name} picture={this.state.picture} /> : null;
-    let loading = this.state.loading ? <Loading /> : null;
-    let error = this.state.error;
+    let hasData = this.props.name && this.props.picture;
+    let pokemonDisplay = hasData && !this.props.loading ? <Pokemon name={this.props.name} picture={this.props.picture} /> : null;
+    let loading = this.props.loading ? <Loading /> : null;
+    let error = this.props.error;
 
     return (
       <div className="App">
